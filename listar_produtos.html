@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Produtos - AMC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="listar_produtos.css">
+</head>
+<body>
+    <div class="center-wrapper"> 
+        <div class="data-card">
+            
+            <header class="top-bar">
+                <div class="logo-top">AMC</div>
+                <h1 class="top-title">Listar Produtos</h1>
+                <div class="user-icon-top">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+            
+            <div class="card-content-area">
+                <div class="actions-bar">
+                    <div class="search-group">
+                        <input type="text" placeholder="Buscar produto por nome ou SKU..." class="search-input">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <a href="add_produto.html" class="btn-add-func">
+                        <i class="fas fa-plus-circle"></i> Adicionar Produto
+                    </a>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome do Produto</th>
+                                <th>SKU</th>
+                                <th>Preço Venda</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>P001</td>
+                                <td>Smartphone Xylo 10</td>
+                                <td>XYLO-10</td>
+                                <td>R$ 1.500,00</td>
+                                <td class="stock-low">15</td> <td class="action-buttons">
+                                    <a href="editar_produto.html" title="Editar">
+                                        <i class="fas fa-edit edit-icon"></i>
+                                    </a>
+                                    <i class="fas fa-trash-alt delete-icon" title="Excluir" data-produto-id="P001"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>P002</td>
+                                <td>Headset Pro Audio</td>
+                                <td>HSPRO</td>
+                                <td>R$ 250,00</td>
+                                <td class="stock-high">120</td> <td class="action-buttons">
+                                    <a href="editar_produto.html" title="Editar">
+                                        <i class="fas fa-edit edit-icon"></i>
+                                    </a>
+                                    <i class="fas fa-trash-alt delete-icon" title="Excluir" data-produto-id="P002"></i>
+                                </td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <span>Página 1 de 8</span>
+                    <button>&lt; Anterior</button>
+                    <button>Próxima &gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="deleteModal" class="modal delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-exclamation-triangle modal-icon delete-icon-color"></i>
+                <h2 class="modal-title">Confirmar Exclusão</h2>
+            </div>
+            <p class="modal-message">Deseja excluir este produto?</p>
+            <div class="modal-actions">
+                <button id="btnExcluirSim" class="modal-btn btn-delete">Sim</button>
+                <button id="btnExcluirNao" class="modal-btn btn-cancel-delete">Não</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        
+        const deleteIcons = document.querySelectorAll('.delete-icon'); 
+        const btnExcluirSim = document.getElementById('btnExcluirSim');
+        const btnExcluirNao = document.getElementById('btnExcluirNao');
+        let produtoParaExcluirId = null;
+
+        deleteIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                produtoParaExcluirId = this.getAttribute('data-produto-id'); 
+                deleteModal.style.display = 'flex';
+            });
+        });
+
+        btnExcluirSim.addEventListener('click', function() {
+            console.log(`Produto ID ${produtoParaExcluirId} foi excluído. (Simulação)`);
+            
+            deleteModal.style.display = 'none'; 
+            produtoParaExcluirId = null; 
+        });
+
+        btnExcluirNao.addEventListener('click', function() {
+            deleteModal.style.display = 'none'; 
+            produtoParaExcluirId = null;
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == deleteModal) {
+                deleteModal.style.display = 'none';
+                produtoParaExcluirId = null;
+            }
+        });
+    </script>
+</body>
+</html>
