@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pedido - AMC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="editar_pedido.css"> 
+</head>
+<body>
+    <div class="main-content-wrapper">
+        <div class="form-card">
+            
+            <header class="top-bar">
+                <div class="logo-top">AMC</div>
+                <h1 class="top-title">Editar Pedido</h1>
+                <div class="user-icon-top">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+
+            <form id="formPedido" action="listar_pedidos.html" method="POST">
+                
+                <div class="form-sections-grid">
+                    
+                    <div class="section-container">
+                        <h2><i class="fas fa-user-tag icon-mini"></i> Dados do Cliente</h2>
+                        <div class="input-group">
+                            <label for="cliente">Selecionar Cliente:</label>
+                            <select id="cliente" name="cliente" required>
+                                <option value="cli1" selected>João Mendes (CPF 123.456)</option>
+                                <option value="cli2">Maria Antunes (CPF 789.012)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="data">Data do Pedido:</label>
+                            <input type="date" id="data" name="data" value="2025-11-20" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="pagamento">Forma de Pagamento:</label>
+                            <select id="pagamento" name="pagamento" required>
+                                <option value="pix">PIX</option>
+                                <option value="cartao" selected>Cartão de Crédito</option>
+                                <option value="boleto">Boleto</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="section-container item-selection">
+                        <h2><i class="fas fa-boxes icon-mini"></i> Itens do Pedido</h2>
+                        
+                        <div class="item-add-area">
+                            <div class="input-group item-input">
+                                <label for="produto">Produto:</label>
+                                <select id="produto" name="produto">
+                                    <option value="">--- Selecione um Produto ---</option>
+                                    <option value="p1">Smartphone Xylo 10 (R$ 1.500,00)</option>
+                                    <option value="p2">Headset Pro Audio (R$ 250,00)</option>
+                                </select>
+                            </div>
+                            <div class="input-group qtd-input">
+                                <label for="quantidade_item">Qtd:</label>
+                                <input type="number" id="quantidade_item" name="quantidade_item" value="1" min="1">
+                            </div>
+                            <button type="button" class="btn-add-item"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+
+                        <div class="added-items-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Qtd</th>
+                                        <th>Valor Unit.</th>
+                                        <th>Total</th>
+                                        <th>Remover</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Headset Pro Audio</td>
+                                        <td>2</td>
+                                        <td>R$ 250,00</td>
+                                        <td>R$ 500,00</td>
+                                        <td><i class="fas fa-trash-alt remove-item-icon"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Smartphone Xylo 10</td>
+                                        <td>1</td>
+                                        <td>R$ 1.500,00</td>
+                                        <td>R$ 1.500,00</td>
+                                        <td><i class="fas fa-trash-alt remove-item-icon"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-actions">
+                    <div class="total-area">
+                        <span>Total do Pedido:</span>
+                        <span class="total-value">R$ 2.000,00</span>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn-primary" onclick="mostrarSucesso()">Atualizar Pedido</button> 
+                        <button type="button" class="btn-secondary" onclick="window.location.href='listar_pedidos.html'">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="successModal" class="modal success-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle modal-icon success-icon-color"></i>
+                <h2 class="modal-title">Sucesso!</h2>
+            </div>
+            <p class="modal-message">Pedido atualizado com sucesso!</p>
+            <div class="modal-actions">
+                <button id="btnOk" class="modal-btn btn-success-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const successModal = document.getElementById('successModal');
+        const btnOk = document.getElementById('btnOk');
+
+        function mostrarSucesso() {
+            
+            successModal.style.display = 'flex';
+        }
+
+        
+        btnOk.addEventListener('click', function() {
+            
+            successModal.style.display = 'none';
+            
+            window.location.href = 'listar_pedidos.html'; 
+        });
+
+        
+        window.addEventListener('click', function(event) {
+            if (event.target == successModal) {
+                successModal.style.display = 'none';
+                window.location.href = 'listar_pedidos.html';
+            }
+        });
+    </script>
+</body>
+</html>
