@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Funcionário - AMC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="add_funcionario.css">
+</head>
+<body>
+    <div class="main-content-wrapper">
+        <div class="form-card">
+            
+            <header class="top-bar">
+                <div class="logo-top">AMC</div>
+                <h1 class="top-title">Adicionar Funcionário</h1>
+                <div class="user-icon-top">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+
+            <form action="#" method="POST">
+                
+                <div class="input-grid">
+                    
+                    <div class="input-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="idade">Idade:</label>
+                        <input type="number" id="idade" name="idade" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="endereco">Endereço:</label>
+                        <input type="text" id="endereco" name="endereco" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="cargo">Cargo:</label>
+                        <input type="text" id="cargo" name="cargo" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" id="cpf" name="cpf" required>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-primary">Cadastrar</button>
+                    <button type="button" class="btn-secondary" onclick="window.location.href='painel.html'">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <i class="fas fa-check-circle modal-icon"></i>
+            <h2 class="modal-title">Sucesso!</h2>
+        </div>
+        <p class="modal-message">Funcionário cadastrado com sucesso! Deseja continuar?</p>
+        <div class="modal-actions">
+            <button id="btnSim" class="modal-btn btn-confirm">Sim, continuar</button>
+            <button id="btnNao" class="modal-btn btn-cancel">Não, voltar ao Painel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const form = document.querySelector('form');
+    const modal = document.getElementById('successModal');
+    const btnSim = document.getElementById('btnSim');
+    const btnNao = document.getElementById('btnNao');
+
+    form.addEventListener('submit', function(event) {
+
+        event.preventDefault(); 
+        
+        
+        modal.style.display = 'flex';
+    });
+
+    
+    btnSim.addEventListener('click', function() {
+        
+        modal.style.display = 'none'; 
+        
+        
+        form.reset(); 
+    });
+
+    
+    btnNao.addEventListener('click', function() {
+
+        window.location.href = 'painel.html'; 
+    });
+</script>
+
+</body>
+</html>
